@@ -46,7 +46,9 @@ class _CircleShapeCheckDotExampleState
           value: 2,
           groupValue: _groupValue,
           onChanged: _onChanged,
-          dotStyle: const DotStyle.check(StrokeCap.round),
+          activeFillColor: Colors.red,
+          activeBorderColor: Colors.transparent,
+          dotStyle: const DotStyle.check(StrokeCap.round, false),
         ),
         EasyRadio<int>(
           value: 3,

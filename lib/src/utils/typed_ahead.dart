@@ -12,7 +12,7 @@ typedef EmptyCallback = void Function();
 typedef SquareFilledCallback = void Function(double radius);
 
 /// A typedef representing a callback function that takes a [StrokeCap] parameter and returns void.
-typedef CheckCallback = void Function(StrokeCap strokeCap);
+typedef CheckCallback = void Function(StrokeCap strokeCap,bool check);
 
 /// A typedef representing a callback function that takes a [double] parameter
 /// representing the border radius of a square outline.

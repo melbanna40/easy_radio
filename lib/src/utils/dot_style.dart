@@ -22,10 +22,16 @@ sealed class DotStyle {
 
   // Factory constructors for different dot styles with optional parameters
   const factory DotStyle.circle() = CircleStyle;
+
   const factory DotStyle.squareFilled([double? radius]) = SquareFilledStyle;
-  const factory DotStyle.check([StrokeCap? strokeCap]) = CheckStyle;
+
+  const factory DotStyle.check([StrokeCap? strokeCap, bool? check]) =
+      CheckStyle;
+
   const factory DotStyle.squareOutlined([double? radius]) = SquareOutlinedStyle;
+
   const factory DotStyle.diamondFilled() = DiamondFilledStyle;
+
   const factory DotStyle.diamondOutlined() = DiamondOutlinedStyle;
 
   // Method to handle different dot styles using callback functions
@@ -88,9 +94,11 @@ final class SquareFilledStyle extends DotStyle {
 final class CheckStyle extends DotStyle {
   // Constructor with an optional StrokeCap parameter
   // Initialize the private field with the provided parameter or a default value
-  const CheckStyle([StrokeCap? strokeCap])
-      : _strokeCap = strokeCap ?? kDotCheckStyleStockCap;
+  const CheckStyle([StrokeCap? strokeCap, bool? check])
+      : _strokeCap = strokeCap ?? kDotCheckStyleStockCap,
+        _check = check ?? true;
   final StrokeCap _strokeCap; // Private field to store the StrokeCap
+  final bool _check;
 
   @override
   int get hashCode => _strokeCap.hashCode;
@@ -109,8 +117,8 @@ final class CheckStyle extends DotStyle {
     required EmptyCallback diamondFilled,
     required EmptyCallback diamondOutlined,
   }) =>
-      check(
-          _strokeCap); // Invoke the 'check' callback with the stored StrokeCap
+      check(_strokeCap,
+          _check); // Invoke the 'check' callback with the stored StrokeCap
 }
 
 // Define a final class for SquareOutlinedStyle that extends DotStyle
@@ -126,6 +134,7 @@ final class SquareOutlinedStyle extends DotStyle {
   @override
   bool operator ==(Object other) =>
       other is SquareOutlinedStyle && other._radius == _radius;
+
   // Override the 'when' method to handle SquareOutlinedStyle
   @override
   void when({

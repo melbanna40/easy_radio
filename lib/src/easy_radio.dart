@@ -382,11 +382,11 @@ class _CustomRadioPainter extends ToggleablePainter {
             _drawAnimatedSquareWithBorderRadius(
                 center, canvas, paint, borderRadius);
           },
-          check: (strokeCap) {
+          check: (strokeCap, check) {
             paint.style = PaintingStyle.stroke;
             paint.strokeWidth = 2.0;
             paint.strokeCap = strokeCap;
-            _drawAnimatedCheck(center, canvas, paint);
+            _drawAnimatedCheck(center, canvas, paint, check);
           },
           squareOutlined: (borderRadius) {
             paint.style = PaintingStyle.stroke;
@@ -493,20 +493,34 @@ class _CustomRadioPainter extends ToggleablePainter {
   /// at a position 45% from the top, and ends at a position 75% from the top.
   /// The third line starts at the left side of the bounding rectangle of the check mark,
   /// at a position 75% from the top, and ends at a position 30% from the top.
-  void _drawAnimatedCheck(Offset center, Canvas canvas, Paint paint) {
+  void _drawAnimatedCheck(
+      Offset center, Canvas canvas, Paint paint, bool check) {
     final double radius = _dotRadius * position.value;
     final Rect checkRect = Rect.fromCircle(
       center: center,
       radius: radius,
     );
-    final Path checkPath = Path()
-      ..moveTo(checkRect.left + checkRect.width * 0.25,
-          checkRect.top + checkRect.height * 0.5)
-      ..lineTo(checkRect.left + checkRect.width * 0.45,
-          checkRect.top + checkRect.height * 0.7)
-      ..lineTo(checkRect.left + checkRect.width * 0.75,
-          checkRect.top + checkRect.height * 0.3);
-    canvas.drawPath(checkPath, paint);
+    if (check) {
+      final Path checkPath = Path()
+        ..moveTo(checkRect.left + checkRect.width * 0.25,
+            checkRect.top + checkRect.height * 0.5)
+        ..lineTo(checkRect.left + checkRect.width * 0.45,
+            checkRect.top + checkRect.height * 0.7)
+        ..lineTo(checkRect.left + checkRect.width * 0.75,
+            checkRect.top + checkRect.height * 0.3);
+      canvas.drawPath(checkPath, paint);
+    } else {
+      final paint = Paint()
+        ..color = Colors.white
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5;
+      final closePath = Path()
+        ..moveTo(24 * 0.3, 24 * 0.3)
+        ..lineTo(24 * 0.7, 24 * 0.7)
+        ..moveTo(24 * 0.7, 24 * 0.3)
+        ..lineTo(24 * 0.3, 24 * 0.7);
+      canvas.drawPath(closePath, paint);
+    }
   }
 
   /// Draws the outer circle shape on the canvas.
