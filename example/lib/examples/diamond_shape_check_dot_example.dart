@@ -47,7 +47,8 @@ class _DiamondShapeCheckDotExampleState
           value: 2,
           groupValue: _groupValue,
           onChanged: _onChanged,
-          dotStyle: const DotStyle.check(),
+          dotStyle: const DotStyle.check(StrokeCap.round, false),
+          dotColor: Colors.red,
           shape: const RadioShape.diamond(),
         ),
         EasyRadio<int>(

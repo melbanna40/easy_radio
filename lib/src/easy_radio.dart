@@ -510,8 +510,8 @@ class _CustomRadioPainter extends ToggleablePainter {
             checkRect.top + checkRect.height * 0.3);
       canvas.drawPath(checkPath, paint);
     } else {
-      final paint = Paint()
-        ..color = Colors.white
+      final customPaint = Paint()
+        ..color = paint.color
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2.5;
       final closePath = Path()
@@ -519,7 +519,7 @@ class _CustomRadioPainter extends ToggleablePainter {
         ..lineTo(24 * 0.7, 24 * 0.7)
         ..moveTo(24 * 0.7, 24 * 0.3)
         ..lineTo(24 * 0.3, 24 * 0.7);
-      canvas.drawPath(closePath, paint);
+      canvas.drawPath(closePath, customPaint);
     }
   }
 

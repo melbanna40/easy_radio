@@ -47,7 +47,7 @@ class _SquareShapeCheckDotExampleState
           value: 2,
           groupValue: _groupValue,
           onChanged: _onChanged,
-          dotStyle: const DotStyle.check(),
+          dotStyle: const DotStyle.check(StrokeCap.round, false),
           shape: const RadioShape.square(),
         ),
         EasyRadio<int>(
